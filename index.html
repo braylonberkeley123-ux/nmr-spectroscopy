@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive NMR Spectroscopy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>InteractiveNMRspectroscopy</h1>
+</header>
+
+<!-- HOME PAGE -->
+<div id="homePage" class="page">
+  <div class="home-buttons">
+
+    <div class="home-button" onclick="openBasics()">
+      <h2>Click to learn NMR Basics</h2>
+      <img src="images/nmr_cartoon.png">
+    </div>
+
+    <div class="home-button" onclick="openPractice()">
+      <h2>Click to practice NMR</h2>
+      <img src="images/practice_cartoon.png">
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 InteractiveNMRspectroscopy™</p>
+    <p>Contact: yourname@email.com</p>
+  </footer>
+</div>
+
+<!-- BASICS PAGE -->
+<div id="basicsPage" class="page hidden">
+  <button class="back-button" onclick="goHome()">← Back</button>
+
+  <div class="blackboard" onclick="nextLesson()">
+
+    <div class="bubble">
+      <p id="lessonText"></p>
+    </div>
+
+    <div class="board-content spectrum-container">
+      <img id="lessonImage">
+
+      <!-- Clickable Peaks -->
+      <div class="peak" style="top:55%; left:40%;" onclick="peakInfo('CH3')"></div>
+      <div class="peak" style="top:48%; left:60%;" onclick="peakInfo('CH2')"></div>
+    </div>
+
+  </div>
+
+  <audio id="narration"></audio>
+</div>
+
+<!-- PRACTICE MENU -->
+<div id="practicePage" class="page hidden">
+  <button class="back-button" onclick="goHome()">← Back</button>
+
+  <div class="practice-grid">
+
+    <div class="practice-button" onclick="openPracticeBoard(0)">
+      <h3>Practice 1</h3>
+      <img src="images/practice1.png">
+    </div>
+
+    <div class="practice-button" onclick="openPracticeBoard(1)">
+      <h3>Practice 2</h3>
+      <img src="images/practice2.png">
+    </div>
+
+    <div class="practice-button" onclick="openPracticeBoard(2)">
+      <h3>Practice 3</h3>
+      <img src="images/practice3.png">
+    </div>
+
+  </div>
+</div>
+
+<!-- PRACTICE BLACKBOARD -->
+<div id="practiceBoardPage" class="page hidden">
+  <button class="back-button" onclick="openPractice()">← Back</button>
+
+  <div class="blackboard">
+
+    <div class="bubble">
+      <p id="practiceText"></p>
+    </div>
+
+    <div class="board-content">
+      <img id="practiceImage">
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
