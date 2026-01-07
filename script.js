@@ -1,173 +1,113 @@
-/* GENERAL */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: orange;
+let lessonStep = 0;
+
+const lessons = [
+  {
+    text: "Welcome to InteractiveSpectroscopy.com! Here you’ll learn the basics of NMR spectroscopy and how chemists use it to analyze molecules. Click anywhere on the board to move through the lesson.",
+    image: "images/lesson1.png",
+    bubbleImage: "images/bubble1.png",
+    audio: "images/audio1.mp3"
+  },
+  {
+    text: "Before focusing on NMR, let’s define spectroscopy more broadly. Spectroscopy is the study of how electromagnetic radiation interacts with matter. Many types exist, including X-ray, infrared, and visible-light spectroscopy.",
+    image: "images/lesson2.png",
+    bubbleImage: "images/bubble2.png",
+    audio: "images/audio2.mp3"
+  },
+  {
+    text: "Spectroscopy is widely used to determine chemical composition. In wet-lab chemistry, light spectroscopy can track reaction rates by measuring absorbance. In geology and NASA missions, spectroscopy reveals what materials are present in distant samples.",
+    image: "images/lesson3.png",
+    bubbleImage: "images/bubble3.png",
+    audio: "images/audio3.mp3"
+  },
+  {
+    text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, the response can be plotted versus wavelength or frequency. This plot — the spectrum — contains structural information.",
+    image: "images/lesson4.png",
+    bubbleImage: "",
+    audio: "images/audio4.mp3"
+  },
+  {
+    text: "This lesson focuses on Nuclear Magnetic Resonance (NMR) spectroscopy. NMR uses low-energy radio waves to probe atomic nuclei and is widely used in chemistry to identify molecules and functional groups.",
+    image: "images/lesson5.png",
+    bubbleImage: "images/bubble5.png",
+    audio: "images/audio5.mp3"
+  }
+];
+
+const practiceBoards = [
+  {
+    text: "Identify unique proton environments in the molecule shown.",
+    image: "images/practice1.png"
+  },
+  {
+    text: "Predict splitting patterns based on neighboring protons.",
+    image: "images/practice2.png"
+  },
+  {
+    text: "Estimate chemical shifts using functional group information.",
+    image: "images/practice3.png"
+  }
+];
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(page => page.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
 
-.page {
-  padding: 40px;
+function goHome() {
+  showPage("homePage");
 }
 
-.hidden {
-  display: none;
+function openBasics() {
+  lessonStep = 0;
+  updateLesson();
+  showPage("basicsPage");
 }
 
-/* HEADER */
-.header {
-  background: linear-gradient(to bottom, #1e90ff, #2ecc71);
-  padding: 30px;
-  text-align: center;
+function nextLesson() {
+  lessonStep = (lessonStep + 1) % lessons.length;
+  updateLesson();
 }
 
-.header h1 {
-  color: white;
-  font-size: 3rem;
-  margin: 0;
-}
+function updateLesson() {
+  const lesson = lessons[lessonStep];
 
-/* HOME */
-.home-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  margin-top: 80px;
-}
+  // Update text
+  document.getElementById("lessonText").textContent = lesson.text;
 
-.home-button {
-  width: 360px;
-  height: 320px;
-  background: white;
-  border-radius: 16px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  transition: transform 0.2s;
-}
+  // Update main spectrum
+  const lessonImage = document.getElementById("lessonImage");
+  lessonImage.src = lesson.image;
 
-.home-button:hover {
-  transform: scale(1.05);
-}
-
-.home-button img {
-  width: 80%;
-  margin-top: 20px;
-}
-
-/* FOOTER */
-.footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-/* BACK BUTTON */
-.back-button {
-  background: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 15px;
-}
-
-/* BLACKBOARD */
-.blackboard {
-  background: #1f3d2b;
-  border: 12px solid #5c3b1e;
-  border-radius: 12px;
-  height: 70vh;
-  padding: 30px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  overflow: hidden; /* cut off any overflowing images */
-}
-
-/* SPEECH BUBBLE */
-.bubble {
-  background: white;
-  border-radius: 16px;
-  padding: 15px 20px;
-  max-width: 350px;
-}
-
-/* BUBBLE IMAGE */
-.bubble-image-container {
-  max-height: 35%; /* maximum portion of blackboard */
-  overflow: hidden; /* cut off bottom if too tall */
-}
-
-.bubble-image {
-  width: 100%;
-  display: none; /* controlled by JS */
-  border-radius: 8px;
-}
-
-/* BOARD CONTENT */
-.board-content {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start; /* align top with bubble image */
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.board-content img {
-  max-width: 70%;
-  max-height: 70%;
-}
-
-/* SPECTRUM PEAKS */
-.spectrum-container {
-  position: relative;
-}
-
-.peak {
-  width: 18px;
-  height: 18px;
-  background: red;
-  border-radius: 50%;
-  position: absolute;
-  cursor: pointer;
-  opacity: 0.7;
-}
-
-/* PRACTICE GRID */
-.practice-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 30px;
-}
-
-.practice-button {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.practice-button img {
-  width: 100%;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .home-buttons {
-    flex-direction: column;
-    align-items: center;
+  // Update bubble image inside container
+  const bubbleImage = document.getElementById("bubbleImage");
+  if (lesson.bubbleImage && lesson.bubbleImage !== "") {
+    bubbleImage.src = lesson.bubbleImage;
+    bubbleImage.style.display = "block";
+  } else {
+    bubbleImage.style.display = "none";
   }
 
-  .blackboard {
-    height: auto;
+  // Play narration
+  const audio = document.getElementById("narration");
+  if (lesson.audio) {
+    audio.src = lesson.audio;
+    audio.play();
   }
+}
+
+function openPractice() {
+  showPage("practicePage");
+}
+
+function openPracticeBoard(index) {
+  document.getElementById("practiceText").textContent =
+    practiceBoards[index].text;
+  document.getElementById("practiceImage").src =
+    practiceBoards[index].image;
+  showPage("practiceBoardPage");
+}
+
+function peakInfo(label) {
+  document.getElementById("lessonText").textContent =
+    `You clicked a peak associated with ${label} protons. Peaks provide structural information in NMR spectra.`;
 }
