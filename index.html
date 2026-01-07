@@ -15,7 +15,6 @@
 <!-- HOME PAGE -->
 <div id="homePage" class="page">
   <div class="home-buttons">
-
     <div class="home-button" onclick="openBasics()">
       <h2>Click to learn NMR Basics</h2>
       <img src="images/nmr_cartoon.png" alt="NMR cartoon">
@@ -25,7 +24,6 @@
       <h2>Click to practice NMR</h2>
       <img src="images/practice_cartoon.png" alt="Practice cartoon">
     </div>
-
   </div>
 
   <footer class="footer">
@@ -40,21 +38,18 @@
 
   <div class="blackboard" onclick="nextLesson()">
 
-    <!-- TEXT BUBBLE -->
-    <div class="bubble">
-      <p id="lessonText"></p>
+    <!-- LEFT COLUMN: BUBBLE + IMAGE -->
+    <div class="bubble-column">
+      <div class="bubble">
+        <p id="lessonText"></p>
+      </div>
+
+      <img id="bubbleImage" class="bubble-image" alt="Lesson illustration">
     </div>
 
-    <!-- IMAGE BELOW BUBBLE (moves naturally with text height) -->
-    <img id="bubbleImage" class="bubble-image" alt="Lesson illustration">
-
-    <!-- MAIN BOARD CONTENT -->
-    <div class="board-content spectrum-container">
+    <!-- CENTERED LESSON IMAGE -->
+    <div class="board-content">
       <img id="lessonImage" alt="Lesson spectrum">
-
-      <!-- Clickable Peaks -->
-      <div class="peak" style="top:55%; left:40%;" onclick="peakInfo('CH3')"></div>
-      <div class="peak" style="top:48%; left:60%;" onclick="peakInfo('CH2')"></div>
     </div>
 
   </div>
@@ -67,7 +62,6 @@
   <button class="back-button" onclick="goHome()">← Back</button>
 
   <div class="practice-grid">
-
     <div class="practice-button" onclick="openPracticeBoard(0)">
       <h3>Practice 1</h3>
       <img src="images/practice1.png" alt="Practice 1">
@@ -82,7 +76,6 @@
       <h3>Practice 3</h3>
       <img src="images/practice3.png" alt="Practice 3">
     </div>
-
   </div>
 </div>
 
@@ -91,7 +84,6 @@
   <button class="back-button" onclick="openPractice()">← Back</button>
 
   <div class="blackboard">
-
     <div class="bubble">
       <p id="practiceText"></p>
     </div>
@@ -99,7 +91,6 @@
     <div class="board-content">
       <img id="practiceImage" alt="Practice spectrum">
     </div>
-
   </div>
 </div>
 
