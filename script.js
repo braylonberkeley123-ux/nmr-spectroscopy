@@ -79,7 +79,9 @@ const practiceBoards = [
 ];
 
 function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.add("hidden");
+  });
   document.getElementById(id).classList.remove("hidden");
 }
 
@@ -99,12 +101,27 @@ function nextLesson() {
 }
 
 function updateLesson() {
-  document.getElementById("lessonText").textContent = lessons[lessonStep].text;
-  document.getElementById("lessonImage").src = lessons[lessonStep].image;
+  const lesson = lessons[lessonStep];
 
+  // Text bubble
+  document.getElementById("lessonText").textContent = lesson.text;
+
+  // Main spectrum image
+  document.getElementById("lessonImage").src = lesson.image;
+
+  // Bubble image BELOW text bubble (natural flow)
+  const bubbleImage = document.getElementById("bubbleImage");
+  if (lesson.bubbleImage && lesson.bubbleImage !== "") {
+    bubbleImage.src = lesson.bubbleImage;
+    bubbleImage.style.display = "block";
+  } else {
+    bubbleImage.style.display = "none";
+  }
+
+  // Audio narration
   const audio = document.getElementById("narration");
-  if (lessons[lessonStep].audio) {
-    audio.src = lessons[lessonStep].audio;
+  if (lesson.audio) {
+    audio.src = lesson.audio;
     audio.play();
   }
 }
