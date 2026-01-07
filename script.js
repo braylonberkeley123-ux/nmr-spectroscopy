@@ -64,9 +64,18 @@ const lessons = [
 ];
 
 const practiceBoards = [
-  { text: "Identify unique proton environments in the molecule shown.", image: "images/practice1.png" },
-  { text: "Predict splitting patterns based on neighboring protons.", image: "images/practice2.png" },
-  { text: "Estimate chemical shifts using functional group information.", image: "images/practice3.png" }
+  {
+    text: "Identify unique proton environments in the molecule shown.",
+    image: "images/practice1.png"
+  },
+  {
+    text: "Predict splitting patterns based on neighboring protons.",
+    image: "images/practice2.png"
+  },
+  {
+    text: "Estimate chemical shifts using functional group information.",
+    image: "images/practice3.png"
+  }
 ];
 
 function showPage(id) {
@@ -90,22 +99,12 @@ function nextLesson() {
 }
 
 function updateLesson() {
-  const lesson = lessons[lessonStep];
-
-  document.getElementById("lessonText").textContent = lesson.text;
-  document.getElementById("lessonImage").src = lesson.image;
-
-  const bubbleImage = document.getElementById("bubbleImage");
-  if (lesson.bubbleImage) {
-    bubbleImage.src = lesson.bubbleImage;
-    bubbleImage.style.display = "block";
-  } else {
-    bubbleImage.style.display = "none";
-  }
+  document.getElementById("lessonText").textContent = lessons[lessonStep].text;
+  document.getElementById("lessonImage").src = lessons[lessonStep].image;
 
   const audio = document.getElementById("narration");
-  if (lesson.audio) {
-    audio.src = lesson.audio;
+  if (lessons[lessonStep].audio) {
+    audio.src = lessons[lessonStep].audio;
     audio.play();
   }
 }
@@ -115,8 +114,10 @@ function openPractice() {
 }
 
 function openPracticeBoard(index) {
-  document.getElementById("practiceText").textContent = practiceBoards[index].text;
-  document.getElementById("practiceImage").src = practiceBoards[index].image;
+  document.getElementById("practiceText").textContent =
+    practiceBoards[index].text;
+  document.getElementById("practiceImage").src =
+    practiceBoards[index].image;
   showPage("practiceBoardPage");
 }
 
