@@ -18,12 +18,12 @@
 
     <div class="home-button" onclick="openBasics()">
       <h2>Click to learn NMR Basics</h2>
-      <img src="images/nmr_cartoon.png">
+      <img src="images/nmr_cartoon.png" alt="NMR cartoon">
     </div>
 
     <div class="home-button" onclick="openPractice()">
       <h2>Click to practice NMR</h2>
-      <img src="images/practice_cartoon.png">
+      <img src="images/practice_cartoon.png" alt="Practice cartoon">
     </div>
 
   </div>
@@ -40,13 +40,17 @@
 
   <div class="blackboard" onclick="nextLesson()">
 
+    <!-- TEXT BUBBLE -->
     <div class="bubble">
       <p id="lessonText"></p>
-      <img id="bubbleImage" alt="Lesson illustration">
     </div>
 
+    <!-- IMAGE BELOW BUBBLE (moves naturally with text height) -->
+    <img id="bubbleImage" class="bubble-image" alt="Lesson illustration">
+
+    <!-- MAIN BOARD CONTENT -->
     <div class="board-content spectrum-container">
-      <img id="lessonImage">
+      <img id="lessonImage" alt="Lesson spectrum">
 
       <!-- Clickable Peaks -->
       <div class="peak" style="top:55%; left:40%;" onclick="peakInfo('CH3')"></div>
@@ -66,23 +70,23 @@
 
     <div class="practice-button" onclick="openPracticeBoard(0)">
       <h3>Practice 1</h3>
-      <img src="images/practice1.png">
+      <img src="images/practice1.png" alt="Practice 1">
     </div>
 
     <div class="practice-button" onclick="openPracticeBoard(1)">
       <h3>Practice 2</h3>
-      <img src="images/practice2.png">
+      <img src="images/practice2.png" alt="Practice 2">
     </div>
 
     <div class="practice-button" onclick="openPracticeBoard(2)">
       <h3>Practice 3</h3>
-      <img src="images/practice3.png">
+      <img src="images/practice3.png" alt="Practice 3">
     </div>
 
   </div>
 </div>
 
-<!-- PRACTICE BLACKBOARD -->
+<!-- PRACTICE BLACKBOARD PAGE -->
 <div id="practiceBoardPage" class="page hidden">
   <button class="back-button" onclick="openPractice()">← Back</button>
 
@@ -90,11 +94,10 @@
 
     <div class="bubble">
       <p id="practiceText"></p>
-      <img id="bubbleImage" alt="Practice illustration">
     </div>
 
     <div class="board-content">
-      <img id="practiceImage">
+      <img id="practiceImage" alt="Practice spectrum">
     </div>
 
   </div>
