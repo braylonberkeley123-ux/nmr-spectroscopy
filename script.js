@@ -4,7 +4,7 @@ const lessons = [
   {
     text: "Welcome to InteractiveSpectroscopy.com! Here you’ll learn the basics of NMR spectroscopy and how chemists use it to analyze molecules. Click anywhere on the board to move through the lesson.",
     image: "images/lesson1.png",
-    bubbleImage: "images/bubble1.png",
+    bubbleImage: "",
     audio: "images/audio1.mp3"
   },
   {
@@ -16,19 +16,19 @@ const lessons = [
   {
     text: "Spectroscopy is widely used to determine chemical composition across chemistry, geology, and space science.",
     image: "images/lesson3.png",
-    bubbleImage: "images/bubble3.png",
+    bubbleImage: "images/bubble2.png",
     audio: "images/audio3.mp3"
   },
   {
     text: "A spectrum plots a system’s response versus wavelength or frequency and contains structural information.",
     image: "images/lesson4.png",
-    bubbleImage: "",
+    bubbleImage: "images/bubble3.png",
     audio: "images/audio4.mp3"
   },
   {
     text: "NMR spectroscopy uses radio waves to probe nuclear spins and identify molecular structure.",
     image: "images/lesson5.png",
-    bubbleImage: "images/bubble5.png",
+    bubbleImage: "images/bubble2.png",
     audio: "images/audio5.mp3"
   }
 ];
