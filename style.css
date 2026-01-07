@@ -78,7 +78,7 @@ body {
   height: 70vh;
   padding: 30px;
   position: relative;
-  overflow: hidden; /* prevents image overflow */
+  overflow: hidden;
 }
 
 /* LEFT COLUMN */
@@ -88,7 +88,7 @@ body {
   left: 30px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   max-width: 360px;
 }
 
@@ -99,27 +99,32 @@ body {
   padding: 15px 20px;
 }
 
-/* SMALLER IMAGE BELOW BUBBLE */
+/* IMAGE BELOW BUBBLE (slightly smaller) */
 .bubble-image {
-  max-width: 260px;   /* 🔽 smaller than before */
+  max-width: 260px;
   border-radius: 8px;
   display: none;
 }
 
-/* LESSON IMAGE CONTAINER (NOT vertically centered) */
+/* LESSON IMAGE CONTAINER
+   - Equal space from bubble + right border
+   - NOT vertically centered */
 .board-content {
   position: absolute;
-  top: 40px;          /* 🔒 anchored near top */
-  left: 50%;
-  transform: translateX(-50%);
+  top: 40px;
+
+  /* bubble width (~360px) + gap */
+  left: 420px;
+  right: 40px;
+
   display: flex;
   justify-content: center;
 }
 
 /* BIGGER LESSON IMAGE */
 .board-content img {
-  max-width: 85%;     /* 🔼 bigger */
-  max-height: calc(70vh - 100px); /* never exceed board */
+  max-width: 100%;
+  max-height: calc(70vh - 120px);
 }
 
 /* PRACTICE GRID */
@@ -154,7 +159,6 @@ body {
 
   .board-content {
     position: static;
-    transform: none;
     margin-top: 30px;
   }
 
