@@ -32,7 +32,6 @@ body {
   justify-content: center;
   gap: 80px;
   margin-top: 80px;
-  margin-bottom: 80px; /* space below buttons */
 }
 
 .home-button {
@@ -78,13 +77,11 @@ body {
   height: 70vh;
   padding: 30px;
   position: relative;
+  display: flex;
 }
 
 /* LEFT COLUMN */
 .bubble-column {
-  position: absolute;
-  top: 30px;
-  left: 30px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -107,10 +104,7 @@ body {
 
 /* CENTERED BOARD CONTENT */
 .board-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,16 +142,7 @@ body {
   }
 
   .blackboard {
+    flex-direction: column;
     height: auto;
-  }
-
-  .board-content {
-    position: static;
-    transform: none;
-    margin-top: 40px;
-  }
-
-  .bubble-column {
-    position: static;
   }
 }
