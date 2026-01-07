@@ -49,7 +49,9 @@ const practiceBoards = [
 ];
 
 function showPage(id) {
-  document.querySelectorAll(".page").forEach(page => page.classList.add("hidden"));
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.add("hidden");
+  });
   document.getElementById(id).classList.remove("hidden");
 }
 
@@ -71,23 +73,35 @@ function nextLesson() {
 function updateLesson() {
   const lesson = lessons[lessonStep];
 
-  // Update text
+  const blackboard = document.querySelector(".blackboard");
+  const bubbleImage = document.getElementById("bubbleImage");
+  const lessonImage = document.getElementById("lessonImage");
+  const boardContent = document.querySelector(".board-content");
+
+  // Text
   document.getElementById("lessonText").textContent = lesson.text;
 
-  // Update main spectrum
-  const lessonImage = document.getElementById("lessonImage");
+  // Main spectrum image
   lessonImage.src = lesson.image;
 
-  // Update bubble image inside container
-  const bubbleImage = document.getElementById("bubbleImage");
+  // Align spectrum with bubble image (TOP, not centered)
+  boardContent.style.alignItems = "flex-start";
+  boardContent.style.paddingTop = "10px";
+
+  // Bubble image behavior
   if (lesson.bubbleImage && lesson.bubbleImage !== "") {
     bubbleImage.src = lesson.bubbleImage;
     bubbleImage.style.display = "block";
+
+    // Prevent bubble image from exceeding blackboard height
+    const blackboardHeight = blackboard.clientHeight;
+    bubbleImage.style.maxHeight = `${blackboardHeight * 0.35}px`;
+    bubbleImage.style.objectFit = "contain";
   } else {
     bubbleImage.style.display = "none";
   }
 
-  // Play narration
+  // Audio narration
   const audio = document.getElementById("narration");
   if (lesson.audio) {
     audio.src = lesson.audio;
