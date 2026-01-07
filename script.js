@@ -1,4 +1,5 @@
 let lessonStep = 0;
+alert("NEW SCRIPT LOADED");
 
 const lessons = [
   {
