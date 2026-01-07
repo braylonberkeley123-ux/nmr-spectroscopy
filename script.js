@@ -89,3 +89,4 @@ function openPracticeBoard(index) {
   document.getElementById("practiceImage").src = practiceBoards[index].image;
   showPage("practiceBoardPage");
 }
+ 
