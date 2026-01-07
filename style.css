@@ -7,14 +7,10 @@ body {
 
 .page {
   padding: 40px;
-  opacity: 1;
-  transition: opacity 0.4s ease;
 }
 
 .hidden {
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
+  display: none;
 }
 
 /* HEADER */
@@ -60,11 +56,13 @@ body {
 
 /* FOOTER */
 .footer {
-  margin-top: 100px;
   background: #222;
   color: white;
   text-align: center;
   padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 /* BACK BUTTON */
@@ -86,22 +84,31 @@ body {
   height: 70vh;
   padding: 30px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-/* SPEECH BUBBLE */
+/* SPEECH BUBBLE (NOW FLOWS NATURALLY) */
 .bubble {
   background: white;
   border-radius: 16px;
   padding: 15px 20px;
   max-width: 350px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
+}
+
+/* IMAGE BELOW BUBBLE */
+.bubble-image {
+  max-width: 320px;
+  border-radius: 8px;
+  display: none; /* controlled by JS */
 }
 
 /* BOARD CONTENT */
 .board-content {
-  height: 100%;
+  flex: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,10 +162,5 @@ body {
 
   .blackboard {
     height: auto;
-  }
-
-  .bubble {
-    position: relative;
-    margin-bottom: 20px;
   }
 }
