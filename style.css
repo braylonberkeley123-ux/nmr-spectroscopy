@@ -43,6 +43,13 @@ body {
   text-align: center;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ✅ RESTORED HOVER EFFECT */
+.home-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.5);
 }
 
 .home-button img {
