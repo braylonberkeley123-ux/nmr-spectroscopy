@@ -238,7 +238,7 @@ const lessons = [
   {
     text: "The tools and principles of NMR are everywhere—from pharmaceuticals to geology to chemistry and beyond—and they play a vital role in modern science. Some might even say it’s mesmerizing! We hope you learned a great deal from these lessons and gained an appreciation for the importance of NMR and spectroscopy as a whole.",
     image: "images/lesson40.png",
-    bubbleImage: "images/bubble2.png",
+    bubbleImage: "",
     audio: "images/audio5.mp3"
   },
   {
