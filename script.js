@@ -70,7 +70,7 @@ const lessons = [
   {
     text: "Great! Now let’s examine what causes the differences in energy levels that lead to spin flips. While many factors influence spin behavior across different elemental isotopes, we will focus on hydrogen-1. This isotope is present in nearly all organic molecules, is the most commonly analyzed nucleus in NMR spectroscopy, and provides a foundation that can be readily extended to other nuclei once its principles are understood.                                To clarify, the remainder of this lesson will focus on ¹H NMR spectroscopy—a technique in which radiofrequency radiation is tuned to induce spin flips in hydrogen nuclei, and ignoring all other atoms. This method exploits the omnipresence and high natural abundance of ¹H nuclei to identify and quantify chemical environments in organic molecules.",
     image: "images/lesson12.png",
-    bubbleImage: "images/bubble2.png",
+    bubbleImage: "",
     audio: "images/audio2.mp3"
   },
   {
