@@ -44,7 +44,7 @@ const lessons = [
     audio: "images/audio2.mp3"
   },
   {
-    text: "Applying radio-frequency energy of the correct amount can flip the spin of the nucleus. We denote the spin as being either ½ or -½ depending on the orientation of the nucleus. This “flipping event” is core to the study of NMR. (note: the reasoning for the specific integer, ½, is derived from quantum mechanics. We won’t explore why this is the case, as it is not essential to understanding how to apply NMR for most applications)",
+    text: "Applying radio-frequency energy of the correct amount can flip the spin of the nucleus. We denote the spin as being either ½ or -½ depending on the orientation of the nucleus. This “flipping event” is core to the study of NMR. (Note: the reasoning for the specific integer, ½, is derived from quantum mechanics. We won’t explore why this is the case, as it is not essential to understanding how to apply NMR for most applications).",
     image: "images/lesson8.png",
     bubbleImage: "images/bubble2.png",
     audio: "images/audio3.mp3"
