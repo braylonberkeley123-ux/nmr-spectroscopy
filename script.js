@@ -22,13 +22,13 @@ const lessons = [
   {
     text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, the response can be plotted versus wavelength or frequency. This plot — the spectrum — contains information about the sample’s structure.",
     image: "images/lesson4.png",
-    bubbleImage: "",
+    bubbleImage: "images/bubble2.png",
     audio: "images/audio4.mp3"
   },
   {
     text: "This lesson focuses on Nuclear Magnetic Resonance (NMR) spectroscopy. NMR uses low-energy radio waves to probe atomic nuclei and is widely used in chemistry to identify molecules and functional groups.",
     image: "images/lesson5.png",
-    bubbleImage: "images/bubble2.png",
+    bubbleImage: "",
     audio: "images/audio5.mp3"
   },
     {
