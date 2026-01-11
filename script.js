@@ -124,7 +124,7 @@ const lessons = [
     {
     text: "Overall, the molecule contains three chemically inequivalent regions. From this, we can form a practical definition of chemical equivalency: nuclei are chemically equivalent if they occupy identical environments as determined by the symmetry of the molecule.",
     image: "images/lesson21.png",
-    bubbleImage: "",
+    bubbleImage: "images/bubble2.png",
     audio: "images/audio1.mp3"
   },
   {
@@ -220,7 +220,7 @@ const lessons = [
   {
     text: "Congratulations! You’ve just learned the fundamentals of NMR spectroscopy and how to predict the spectra of organic molecules. In the next brief example, you’ll apply this knowledge to match a sample NMR spectrum to the hydrogens on a given chemical structure.",
     image: "images/lesson37.png",
-    bubbleImage: "images/bubble2.png",
+    bubbleImage: "",
     audio: "images/audio2.mp3"
   },
   {
