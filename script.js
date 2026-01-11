@@ -22,7 +22,7 @@ const lessons = [
   {
     text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, the response can be plotted versus wavelength or frequency. This plot — the spectrum — contains information about the sample’s structure.",
     image: "images/lesson4.png",
-    bubbleImage: "images/bubble2.png",
+    bubbleImage: "",
     audio: "images/audio4.mp3"
   },
   {
