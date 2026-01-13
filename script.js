@@ -8,13 +8,13 @@ const lessons = [
     audio: "images/audio1.mp3"
   },
   {
-    text: "Before diving into NMR, let’s define spectroscopy more broadly. Spectroscopy is the study of how electromagnetic radiation interacts with matter. Many types exist, including X-ray, infrared, visible-light spectroscopy, although many others exist.",
+    text: "Before diving into NMR, let’s define spectroscopy more broadly. Spectroscopy is the study of how electromagnetic radiation interacts with matter. Many forms of spectroscopy exist, including X-ray, infrared, and visible-light spectroscopy, among others.",
     image: "images/lesson2.png",
     bubbleImage: "images/bubble2.png",
     audio: "images/audio2.mp3"
   },
   {
-    text: "Spectroscopy is widely used to determine chemical composition. In wet-lab chemistry, light spectroscopy can determine reaction rates by measuring absorbance. In space exploration, spectroscopy reveals what materials are present in distant geological samples such the geology of as celestial objects like mars or the moon!",
+    text: "Spectroscopy is widely used to determine chemical composition and structure. In experimental chemistry, optical spectroscopy can determine reaction rates by measuring absorbance. In space exploration, spectroscopy reveals what materials are present in distant geological samples such the geology of as celestial objects like mars or the moon!",
     image: "images/lesson3.png",
     bubbleImage: "images/bubble2.png",
     audio: "images/audio3.mp3"
