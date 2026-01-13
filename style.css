@@ -26,6 +26,22 @@ body {
   margin: 0;
 }
 
+/* HOME INTRO TEXT */
+.home-intro {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.home-intro p {
+  color: white;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 /* HOME */
 .home-buttons {
   display: flex;
