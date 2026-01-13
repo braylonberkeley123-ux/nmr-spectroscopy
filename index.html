@@ -96,17 +96,20 @@
 <div id="practiceBoardPage" class="page hidden">
   <button class="back-button" onclick="openPractice()">← Back</button>
 
-  <div class="blackboard">
-    <div class="bubble">
-      <p id="practiceText"></p>
+  <div class="blackboard" onclick="nextPracticeLesson()">
+
+    <!-- LEFT COLUMN -->
+    <div class="bubble-column">
+      <div class="bubble">
+        <p id="practiceText"></p>
+      </div>
+      <img id="practiceBubbleImage" class="bubble-image" alt="Practice illustration">
     </div>
 
+    <!-- CENTER IMAGE -->
     <div class="board-content">
       <img id="practiceImage" alt="Practice spectrum">
     </div>
+
   </div>
 </div>
-
-<script src="script.js"></script>
-</body>
-</html>
