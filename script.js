@@ -250,7 +250,9 @@ const lessons = [
 ];
 
 const practiceBoards = [
-  { text: "Identify unique proton environments.", image: "images/practice1.png" },
+  {    text: "This concludes our lesson. To continue practicing your skills, return to the home page and explore the many practice problems available on this website.",
+    image: "images/lesson41.png",
+    bubbleImage: "images/bubble2.png",},
   { text: "Predict splitting patterns.", image: "images/practice2.png" },
   { text: "Estimate chemical shifts.", image: "images/practice3.png" }
 ];
