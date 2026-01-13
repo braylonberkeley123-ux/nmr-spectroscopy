@@ -250,22 +250,56 @@ const lessons = [
 ];
 
 
-const practiceBoards = [
-  {
-    text: "Identify unique proton environments.",
-    image: "images/practice1.png",
-    bubbleImage: "images/bubble2.png"
-  },
-  {
-    text: "Predict splitting patterns.",
-    image: "images/practice2.png",
-    bubbleImage: "images/bubble2.png"
-  },
-  {
-    text: "Estimate chemical shifts.",
-    image: "images/practice3.png",
-    bubbleImage: "images/bubble2.png"
-  }
+let practiceIndex = 0;
+let practiceStep = 0;
+
+const practiceLessons = [
+  // PRACTICE 1
+  [
+    {
+      text: "Identify all chemically inequivalent proton environments in this molecule.",
+      image: "images/practice1_step1.png",
+      bubbleImage: "images/bubble2.png"
+    },
+    {
+      text: "Now count how many unique signals you would expect in the ¹H NMR spectrum.",
+      image: "images/practice1_step2.png",
+      bubbleImage: "images/bubble2.png"
+    },
+    {
+      text: "Correct! This molecule has three unique proton environments.",
+      image: "images/practice1_step3.png",
+      bubbleImage: "images/bubble2.png"
+    }
+  ],
+
+  // PRACTICE 2
+  [
+    {
+      text: "Determine the number of neighboring hydrogens for each proton group.",
+      image: "images/practice2_step1.png",
+      bubbleImage: "images/bubble2.png"
+    },
+    {
+      text: "Apply the n + 1 rule to predict the multiplicity.",
+      image: "images/practice2_step2.png",
+      bubbleImage: "images/bubble2.png"
+    }
+  ],
+
+  // PRACTICE 3
+  [
+    {
+      text: "Estimate the chemical shift for each labeled proton.",
+      image: "images/practice3_step1.png",
+      bubbleImage: "images/bubble2.png"
+    },
+    {
+      text: "Compare your estimates with the reference ranges.",
+      image: "images/practice3_step2.png",
+      bubbleImage: "images/bubble2.png"
+    }
+  ]
 ];
 
 /* ---------- PAGE CONTROL ---------- */
@@ -316,6 +350,38 @@ function updateLesson() {
     audio.play();
   }
 }
+
+/*practice navigation logic*/
+
+function openPracticeBoard(index) {
+  practiceIndex = index;
+  practiceStep = 0;
+  updatePracticeLesson();
+  showPage("practiceBoardPage");
+}
+
+function nextPracticeLesson() {
+  const lessonSet = practiceLessons[practiceIndex];
+  practiceStep = (practiceStep + 1) % lessonSet.length;
+  updatePracticeLesson();
+}
+
+function updatePracticeLesson() {
+  const lesson = practiceLessons[practiceIndex][practiceStep];
+
+  document.getElementById("practiceText").textContent = lesson.text;
+  document.getElementById("practiceImage").src = lesson.image;
+
+  const bubbleImage = document.getElementById("practiceBubbleImage");
+  if (lesson.bubbleImage) {
+    bubbleImage.src = lesson.bubbleImage;
+    bubbleImage.style.display = "block";
+  } else {
+    bubbleImage.style.display = "none";
+  }
+}
+
+
 
 /* ---------- PRACTICE BOARD LOGIC (MATCHES LESSON LAYOUT) ---------- */
 
