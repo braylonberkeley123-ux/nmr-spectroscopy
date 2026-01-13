@@ -2,7 +2,7 @@ let lessonStep = 0;
 
 const lessons = [
   {
-    text: "Welcome to InteractiveSpectroscopy.com! Here you’ll learn the basics of NMR spectroscopy and how chemists use it to analyze molecules. Click anywhere on the board to move through the lesson.",
+    text: "Welcome to LearnSpectroscopy.com! Here you’ll learn the basics of NMR spectroscopy and how chemists use it to analyze molecules. Click anywhere on the board to move through the lesson.",
     image: "images/lesson1.png",
     bubbleImage: "",
     audio: "images/audio1.mp3"
