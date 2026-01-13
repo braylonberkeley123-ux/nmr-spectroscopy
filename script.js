@@ -351,7 +351,6 @@ function updateLesson() {
   }
 }
 
-/*practice navigation logic*/
 
 function openPracticeBoard(index) {
   practiceIndex = index;
