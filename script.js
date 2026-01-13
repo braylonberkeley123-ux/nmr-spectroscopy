@@ -380,26 +380,3 @@ function updatePracticeLesson() {
   }
 }
 
-
-
-/* ---------- PRACTICE BOARD LOGIC (MATCHES LESSON LAYOUT) ---------- */
-
-function openPracticeBoard(index) {
-  updatePracticeBoard(index);
-  showPage("practiceBoardPage");
-}
-
-function updatePracticeBoard(index) {
-  const board = practiceBoards[index];
-
-  document.getElementById("practiceText").textContent = board.text;
-  document.getElementById("practiceImage").src = board.image;
-
-  const bubbleImage = document.getElementById("bubbleImage");
-  if (board.bubbleImage) {
-    bubbleImage.src = board.bubbleImage;
-    bubbleImage.style.display = "block";
-  } else {
-    bubbleImage.style.display = "none";
-  }
-}
