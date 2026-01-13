@@ -249,13 +249,26 @@ const lessons = [
   }
 ];
 
+
 const practiceBoards = [
-  {    text: "This concludes our lesson. To continue practicing your skills, return to the home page and explore the many practice problems available on this website.",
-    image: "images/lesson41.png",
-    bubbleImage: "images/bubble2.png",},
-  { text: "Predict splitting patterns.", image: "images/practice2.png" },
-  { text: "Estimate chemical shifts.", image: "images/practice3.png" }
+  {
+    text: "Identify unique proton environments.",
+    image: "images/practice1.png",
+    bubbleImage: "images/bubble2.png"
+  },
+  {
+    text: "Predict splitting patterns.",
+    image: "images/practice2.png",
+    bubbleImage: "images/bubble2.png"
+  },
+  {
+    text: "Estimate chemical shifts.",
+    image: "images/practice3.png",
+    bubbleImage: "images/bubble2.png"
+  }
 ];
+
+/* ---------- PAGE CONTROL ---------- */
 
 function showPage(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
@@ -271,6 +284,12 @@ function openBasics() {
   updateLesson();
   showPage("basicsPage");
 }
+
+function openPractice() {
+  showPage("practicePage");
+}
+
+/* ---------- LESSON LOGIC ---------- */
 
 function nextLesson() {
   lessonStep = (lessonStep + 1) % lessons.length;
@@ -298,13 +317,24 @@ function updateLesson() {
   }
 }
 
-function openPractice() {
-  showPage("practicePage");
-}
+/* ---------- PRACTICE BOARD LOGIC (MATCHES LESSON LAYOUT) ---------- */
 
 function openPracticeBoard(index) {
-  document.getElementById("practiceText").textContent = practiceBoards[index].text;
-  document.getElementById("practiceImage").src = practiceBoards[index].image;
+  updatePracticeBoard(index);
   showPage("practiceBoardPage");
 }
- 
+
+function updatePracticeBoard(index) {
+  const board = practiceBoards[index];
+
+  document.getElementById("practiceText").textContent = board.text;
+  document.getElementById("practiceImage").src = board.image;
+
+  const bubbleImage = document.getElementById("bubbleImage");
+  if (board.bubbleImage) {
+    bubbleImage.src = board.bubbleImage;
+    bubbleImage.style.display = "block";
+  } else {
+    bubbleImage.style.display = "none";
+  }
+}
