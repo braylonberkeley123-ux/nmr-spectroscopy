@@ -42,7 +42,7 @@ const lessons = [
     audio: "images/audio3.mp3"
   },
   {
-    text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, each wavelength or frequency of light can be plotted against the "response" it induces in a chemical. This plot — the spectrum — contains information about the sample’s structure.",
+    text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, each wavelength or frequency of light can be plotted against the “response” it induces in a chemical. This plot — the spectrum — contains information about the sample’s structure.",
     image: "images/lesson4.png",
     bubbleImage: "images/bubble2.png",
     audio: "images/audio4.mp3"
