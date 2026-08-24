@@ -1023,8 +1023,8 @@ function setupSwipe(elementId, onLeft, onRight) {
 function setupEmailLink() {
   const el = document.getElementById("contactEmail");
   if (!el) return;
-  const user = "braylonfoothill";
-  const domain = "gmail.com";
+  const user = "braylonberkeley123";
+  const domain = "berkeley.edu";
   el.textContent = `${user}@${domain}`;
   el.href = `mailto:${user}@${domain}`;
 }
