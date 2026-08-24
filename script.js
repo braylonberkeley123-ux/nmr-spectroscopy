@@ -36,13 +36,13 @@ const lessons = [
     audio: "images/audio2.mp3"
   },
   {
-    text: "Spectroscopy is widely used to determine chemical composition and structure. In experimental chemistry, optical spectroscopy can determine reaction rates by measuring absorbance. In space exploration, spectroscopy reveals what materials are present in distant geological samples such the geology of as celestial objects like mars or the moon!",
+    text: "Spectroscopy is widely used to determine chemical composition and structure. In experimental chemistry, optical spectroscopy can determine reaction rates by measuring absorbance. In space exploration, spectroscopy reveals what materials are present in distant geological bodies like mars or the moon!",
     image: "images/lesson3.png",
     bubbleImage: "images/bubble2.png",
     audio: "images/audio3.mp3"
   },
   {
-    text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, the response can be plotted versus wavelength or frequency. This plot — the spectrum — contains information about the sample’s structure.",
+    text: "A key concept in spectroscopy is the spectrum. When electromagnetic waves interact with a sample, each wavelength or frequency of light can be plotted against the "response" it induces in a chemical. This plot — the spectrum — contains information about the sample’s structure.",
     image: "images/lesson4.png",
     bubbleImage: "images/bubble2.png",
     audio: "images/audio4.mp3"
