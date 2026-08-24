@@ -346,7 +346,7 @@ const lessons = [
 /* Short blurb shown on the homepage roadmap card for each chapter. */
 const chapterBlurbs = {
   "Introduction": "Get oriented before diving into the physics.",
-  "What Is NMR?": "What NMR is and why chemists reach for it.",
+  "What Is NMR?": "What NMR is and why chemists use it.",
   "Spin & Resonance": "Nuclear spin, magnetic alignment, and spin flips.",
   "Chemical Shift": "Shielding, the ppm scale, and what moves a signal.",
   "Equivalence & Symmetry": "Counting signals using molecular symmetry.",
