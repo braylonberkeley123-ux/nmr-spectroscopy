@@ -1,3 +1,8 @@
+/* ============================================================
+   LEARNSPECTROSCOPY.COM — STYLESHEET
+   Theme: chalkboard classroom. One accent (chalk yellow) carries
+   every interactive/actionable moment; everything else stays quiet.
+   ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -28,6 +33,7 @@
 
 * { box-sizing: border-box; }
 
+/* ============ GENERAL ============ */
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -60,6 +66,7 @@ button:focus-visible,
 select:focus-visible,
 .home-button:focus-visible,
 .practice-button:focus-visible,
+.roadmap-card:focus-visible,
 a:focus-visible {
   outline: 3px solid var(--chalk-blue);
   outline-offset: 2px;
@@ -69,6 +76,7 @@ a:focus-visible {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
+/* ============ HEADER ============ */
 .header {
   background: var(--ink-navy);
   background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
@@ -87,6 +95,7 @@ a:focus-visible {
   text-shadow: 0 2px 0 rgba(0,0,0,0.25);
 }
 
+/* ============ HOME INTRO TEXT ============ */
 .home-intro {
   text-align: center;
   margin-top: 28px;
@@ -103,6 +112,7 @@ a:focus-visible {
   font-weight: 400;
 }
 
+/* ============ CONTINUE BANNER ============ */
 .continue-banner {
   max-width: 620px;
   margin: 0 auto 30px;
@@ -136,12 +146,13 @@ a:focus-visible {
 
 .continue-banner button:hover { background: var(--ink-navy-dark); }
 
+/* ============ HOME BUTTONS ============ */
 .home-buttons {
   display: flex;
   justify-content: center;
   gap: 60px;
   margin-top: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
   flex-wrap: wrap;
 }
 
@@ -179,6 +190,154 @@ a:focus-visible {
   border-radius: 8px;
 }
 
+/* ============ HOMEPAGE CONTENT SECTIONS ============ */
+.content-section {
+  max-width: 1100px;
+  margin: 0 auto 64px;
+  padding: 0 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  color: var(--ink-navy);
+  font-size: 2rem;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 28px;
+  font-size: 1rem;
+}
+
+/* --- roadmap ("what you'll learn") --- */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.roadmap-card {
+  background: var(--board-green);
+  color: var(--chalk-white);
+  border: 3px solid var(--board-frame);
+  border-radius: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px var(--shadow-soft);
+}
+
+.roadmap-card h3 {
+  font-family: var(--font-display);
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  color: var(--chalk-yellow);
+}
+
+.roadmap-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--chalk-white);
+  opacity: 0.9;
+}
+
+/* --- why it matters --- */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.why-card {
+  background: var(--cream-card);
+  border: 2px solid var(--ink-navy);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+
+.why-card h3 {
+  font-family: var(--font-display);
+  color: var(--ink-navy);
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+}
+
+.why-card p {
+  margin: 0;
+  color: var(--text-dark);
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+/* --- about --- */
+.about-card {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  background: var(--cream-card);
+  border: 2px solid var(--ink-navy);
+  border-radius: 14px;
+  padding: 26px;
+  flex-wrap: wrap;
+}
+
+.about-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--chalk-yellow);
+  flex-shrink: 0;
+}
+
+.about-text p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+.about-text em { color: var(--text-muted); }
+
+/* --- testimonials --- */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.testimonial-card {
+  background: var(--chalk-white);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 10px var(--shadow-soft);
+  position: relative;
+}
+
+.testimonial-card p {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.testimonial-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ============ FOOTER ============ */
 .footer {
   background: var(--ink-navy-dark);
   color: var(--chalk-white);
@@ -190,6 +349,7 @@ a:focus-visible {
 .footer p { margin: 4px 0; }
 .footer a { text-decoration: underline dotted; }
 
+/* ============ BACK / NAV BUTTONS ============ */
 .back-button {
   background: var(--cream-card);
   border: 2px solid var(--ink-navy);
@@ -203,6 +363,7 @@ a:focus-visible {
 
 .back-button:hover { background: var(--chalk-yellow); }
 
+/* ============ LESSON TOP BAR ============ */
 .lesson-topbar {
   display: flex;
   align-items: center;
@@ -237,6 +398,7 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+/* signature element: a hand-drawn chalk rail that fills as you progress */
 .chalk-rail {
   position: relative;
   flex: 1;
@@ -268,6 +430,7 @@ a:focus-visible {
   filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
 }
 
+/* ============ BLACKBOARD ============ */
 .blackboard {
   background: var(--board-green);
   background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
@@ -281,6 +444,7 @@ a:focus-visible {
   cursor: pointer;
 }
 
+/* LEFT COLUMN */
 .bubble-column {
   position: absolute;
   top: 26px;
@@ -293,6 +457,7 @@ a:focus-visible {
   overflow-y: auto;
 }
 
+/* SPEECH BUBBLE — styled like a notecard taped to the board */
 .bubble {
   background: var(--chalk-white);
   border-radius: 10px;
@@ -323,6 +488,7 @@ a:focus-visible {
   color: var(--text-dark);
 }
 
+/* IMAGE BELOW BUBBLE */
 .bubble-image {
   max-width: 100%;
   border-radius: 8px;
@@ -330,6 +496,7 @@ a:focus-visible {
   box-shadow: 0 4px 10px var(--shadow-strong);
 }
 
+/* LESSON IMAGE CONTAINER */
 .board-content {
   position: absolute;
   top: 30px;
@@ -347,6 +514,7 @@ a:focus-visible {
   border-radius: 4px;
 }
 
+/* ============ QUIZ CARD ============ */
 .quiz-card {
   position: absolute;
   top: 30px;
@@ -360,7 +528,8 @@ a:focus-visible {
   box-shadow: 0 6px 16px var(--shadow-strong);
 }
 
-.quiz-card p#quizQuestion {
+.quiz-card p#quizQuestion,
+.quiz-card p#practiceQuizQuestion {
   font-family: var(--font-display);
   font-size: 1.4rem;
   color: var(--ink-navy);
@@ -415,6 +584,7 @@ a:focus-visible {
 .quiz-feedback.correct { color: #2e6b35; }
 .quiz-feedback.incorrect { color: #a4432f; }
 
+/* ============ LESSON CONTROLS ============ */
 .lesson-controls {
   display: flex;
   align-items: center;
@@ -467,13 +637,23 @@ a:focus-visible {
 .icon-button:hover { background: var(--chalk-yellow); }
 .icon-button[aria-pressed="true"] { background: var(--chalk-blue); }
 
+.audio-status {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--chalk-yellow-dark);
+  min-height: 1.2em;
+  margin: 10px 0 0;
+  font-weight: 600;
+}
+
 .hint-text {
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
+/* ============ PRACTICE MENU ============ */
 .practice-intro {
   text-align: center;
   color: var(--text-muted);
@@ -515,6 +695,27 @@ a:focus-visible {
   border-radius: 8px;
 }
 
+/* text-only practice cards (new quiz-based sets, no illustration yet) */
+.practice-button.text-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.practice-icon {
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+}
+
+.practice-caption {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ============ MOBILE ============ */
 @media (max-width: 768px) {
   .page { padding: 22px 16px; }
 
@@ -525,10 +726,14 @@ a:focus-visible {
     align-items: center;
     gap: 26px;
     margin-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
 
   .home-button { width: 100%; }
+
+  .content-section { margin-bottom: 46px; }
+
+  .about-card { flex-direction: column; text-align: center; }
 
   .blackboard {
     min-height: 0;
