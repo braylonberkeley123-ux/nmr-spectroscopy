@@ -47,6 +47,68 @@
     </div>
   </div>
 
+  <!-- WHAT YOU'LL LEARN — auto-generated from the lesson chapters -->
+  <section class="content-section">
+    <h2 class="section-title">What You’ll Learn</h2>
+    <p class="section-subtitle">The Basics lesson walks through these topics in order — click any one to jump straight there.</p>
+    <div class="roadmap-grid" id="roadmapGrid"></div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="content-section">
+    <h2 class="section-title">Why Spectroscopy Matters</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Medicine</h3>
+        <p>MRI scanners used in hospitals run on the same underlying physics as NMR spectroscopy — nuclear spin and radiofrequency resonance — just scaled up to image the human body instead of a test tube.</p>
+      </div>
+      <div class="why-card">
+        <h3>Pharmaceuticals</h3>
+        <p>Drug developers rely on NMR to confirm a new compound's exact structure and purity before it moves forward — a mislabeled or contaminated molecule can derail years of research.</p>
+      </div>
+      <div class="why-card">
+        <h3>Space &amp; Earth Science</h3>
+        <p>Spectroscopy lets scientists identify minerals and compounds in samples they can't physically test in a lab — from ocean sediment cores to rock samples on Mars.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="content-section">
+    <h2 class="section-title">About This Project</h2>
+    <div class="about-card">
+      <img src="images/creator_photo.png" alt="Photo of the site's creator" class="about-photo">
+      <div class="about-text">
+        <p>
+          Hi — I'm the student behind LearnSpectroscopy.com. I built this site while learning
+          NMR spectroscopy myself, because I wished a resource like this had existed for me:
+          something visual, self-paced, and honest about which parts are genuinely tricky.
+          <em>(Swap this paragraph for your own bio, school, and a real photo whenever you're ready.)</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="content-section">
+    <h2 class="section-title">What Students Say</h2>
+    <p class="section-subtitle">Sample feedback below — replace with real quotes once you've collected them.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>“The blackboard format made chemical shift finally click for me — way easier than a textbook diagram.”</p>
+        <span class="testimonial-name">— Sample student, Organic Chemistry I</span>
+      </div>
+      <div class="testimonial-card">
+        <p>“I used the practice sets before my midterm and the splitting-tree section alone was worth it.”</p>
+        <span class="testimonial-name">— Sample student, Intro Biochemistry</span>
+      </div>
+      <div class="testimonial-card">
+        <p>“Being able to jump straight to the multiplicity chapter to review saved me a ton of time.”</p>
+        <span class="testimonial-name">— Sample student, AP Chemistry</span>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <p>© 2026 Learn Spectroscopy™</p>
     <p>Contact: <a id="contactEmail" href="#">Loading…</a></p>
@@ -108,9 +170,10 @@
     <button id="nextBtn" class="nav-button" onclick="nextLesson()" aria-label="Next step">Next ›</button>
   </div>
 
+  <p id="audioStatus" class="audio-status" aria-live="polite"></p>
   <p class="hint-text">Tip: click the board, use the ← → arrow keys, or swipe to move through the lesson.</p>
 
-  <audio id="narration"></audio>
+  <audio id="narration" preload="auto"></audio>
 </div>
 
 <!-- PRACTICE MENU -->
@@ -136,6 +199,27 @@
          onclick="openPracticeBoard(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPracticeBoard(2);}">
       <h3>Practice 3</h3>
       <img src="images/practice3.png" alt="Practice 3 preview">
+    </div>
+
+    <div class="practice-button text-only" role="button" tabindex="0"
+         onclick="openPracticeBoard(3)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPracticeBoard(3);}">
+      <div class="practice-icon" aria-hidden="true">📊</div>
+      <h3>Practice 4</h3>
+      <p class="practice-caption">Chemical shift ranges — quick-fire quiz</p>
+    </div>
+
+    <div class="practice-button text-only" role="button" tabindex="0"
+         onclick="openPracticeBoard(4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPracticeBoard(4);}">
+      <div class="practice-icon" aria-hidden="true">🧩</div>
+      <h3>Practice 5</h3>
+      <p class="practice-caption">Multiplicity &amp; the n + 1 rule — quick-fire quiz</p>
+    </div>
+
+    <div class="practice-button text-only" role="button" tabindex="0"
+         onclick="openPracticeBoard(5)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openPracticeBoard(5);}">
+      <div class="practice-icon" aria-hidden="true">🔗</div>
+      <h3>Practice 6</h3>
+      <p class="practice-caption">Symmetry &amp; equivalence — quick-fire quiz</p>
     </div>
   </div>
 </div>
@@ -165,8 +249,15 @@
     </div>
 
     <!-- CENTER IMAGE -->
-    <div class="board-content">
+    <div class="board-content" id="practiceBoardContent">
       <img id="practiceImage" alt="Practice spectrum">
+    </div>
+
+    <!-- QUIZ CARD (used by Practice 4–6) -->
+    <div id="practiceQuizCard" class="quiz-card hidden" onclick="event.stopPropagation()">
+      <p id="practiceQuizQuestion"></p>
+      <div id="practiceQuizOptions" class="quiz-options" role="group" aria-label="Answer choices"></div>
+      <p id="practiceQuizFeedback" class="quiz-feedback" aria-live="polite"></p>
     </div>
   </div>
 
