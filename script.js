@@ -1,7 +1,25 @@
+/* ============================================================
+   LEARNSPECTROSCOPY.COM — SCRIPT
+   ============================================================ */
+
 const STORAGE_KEY = "ls_progress_v1";
 
 let lessonStep = 0;
 let quizAnswered = false;
+
+let practiceIndex = 0;
+let practiceStep = 0;
+let practiceQuizAnswered = false;
+
+let audioPrimed = false;
+
+/* Each lesson is either:
+   - an info step: { text, image, bubbleImage, audio, chapter? }
+   - a quiz step:  { type: "quiz", text, options, correctIndex,
+                      feedbackCorrect, feedbackIncorrect }
+   Quiz steps are genuine comprehension checks built from the
+   narration that precedes them (not tied to a specific diagram),
+   so they can be graded honestly. */
 
 const lessons = [
   {
@@ -325,9 +343,24 @@ const lessons = [
   }
 ];
 
-let practiceIndex = 0;
-let practiceStep = 0;
+/* Short blurb shown on the homepage roadmap card for each chapter. */
+const chapterBlurbs = {
+  "Introduction": "Get oriented before diving into the physics.",
+  "What Is NMR?": "What NMR is and why chemists reach for it.",
+  "Spin & Resonance": "Nuclear spin, magnetic alignment, and spin flips.",
+  "Chemical Shift": "Shielding, the ppm scale, and what moves a signal.",
+  "Equivalence & Symmetry": "Counting signals using molecular symmetry.",
+  "Integration & Multiplicity": "Reading peak area and splitting patterns.",
+  "Splitting Trees": "Predicting multiplets from coupling constants.",
+  "Putting It Together": "Apply everything to a full spectrum."
+};
 
+/* practiceLessons[0..2] are the original image-based walkthroughs.
+   practiceLessons[3..5] are new, fully graded multiple-choice sets.
+   They're text-based rather than tied to new custom diagrams, since
+   accurate new practice diagrams need real drawn structures/spectra —
+   swap in illustrated steps here any time by following the same
+   { text, image, bubbleImage } shape used in sets 0–2. */
 const practiceLessons = [
   // PRACTICE 1
   [
@@ -374,8 +407,124 @@ const practiceLessons = [
       image: "images/practice3_step2.png",
       bubbleImage: "images/bubble2.png"
     }
+  ],
+
+  // PRACTICE 4 — Chemical Shift Ranges (new, quiz-based)
+  [
+    {
+      type: "quiz",
+      text: "Which proton environment typically appears furthest downfield?",
+      options: [
+        "Alkane C–H (~0.9–1.5 ppm)",
+        "Alkyl C–H next to oxygen (~3.3–4.5 ppm)",
+        "Aromatic ring C–H (~6.5–8 ppm)",
+        "Aldehyde C–H (~9–10 ppm)"
+      ],
+      correctIndex: 3,
+      feedbackCorrect: "Right — aldehyde protons are among the most deshielded common ¹H environments.",
+      feedbackIncorrect: "Not quite — aldehyde protons (~9–10 ppm) are the most deshielded of these options."
+    },
+    {
+      type: "quiz",
+      text: "A signal appears at about 1.2 ppm. Which environment does that most likely represent?",
+      options: [
+        "Aromatic ring hydrogen",
+        "Simple alkane C–H",
+        "Vinyl (alkene) hydrogen",
+        "Carboxylic acid O–H"
+      ],
+      correctIndex: 1,
+      feedbackCorrect: "Correct — alkane C–H sits far upfield, typically around 0.9–1.5 ppm.",
+      feedbackIncorrect: "Not quite — signals that far upfield (~0.9–1.5 ppm) usually belong to simple alkane C–H."
+    },
+    {
+      type: "quiz",
+      text: "Vinyl (alkene, C=C–H) protons and aromatic ring protons are both deshielded by nearby pi systems. Roughly where do vinyl protons usually fall relative to aromatic ones?",
+      options: [
+        "Further downfield than aromatic protons",
+        "Slightly upfield of aromatic protons, typically around 4.5–6.5 ppm",
+        "In the exact same range as alkane protons",
+        "They never appear on a ¹H spectrum"
+      ],
+      correctIndex: 1,
+      feedbackCorrect: "Right — vinyl protons (~4.5–6.5 ppm) sit upfield of aromatic protons (~6.5–8 ppm).",
+      feedbackIncorrect: "Not quite — vinyl protons typically land around 4.5–6.5 ppm, upfield of the aromatic range."
+    }
+  ],
+
+  // PRACTICE 5 — Multiplicity Rules (new, quiz-based)
+  [
+    {
+      type: "quiz",
+      text: "A proton has 4 chemically equivalent neighboring hydrogens. What multiplicity does the n + 1 rule predict?",
+      options: ["Triplet", "Quartet", "Quintet", "Sextet"],
+      correctIndex: 2,
+      feedbackCorrect: "Correct — 4 neighbors + 1 = 5, a quintet.",
+      feedbackIncorrect: "Remember: neighbors + 1. With 4 neighbors, 4 + 1 = 5, a quintet."
+    },
+    {
+      type: "quiz",
+      text: "A signal shows up as a triplet. How many chemically equivalent neighboring hydrogens does that suggest?",
+      options: ["1", "2", "3", "4"],
+      correctIndex: 1,
+      feedbackCorrect: "Right — a triplet (3 lines) means n + 1 = 3, so n = 2 neighboring hydrogens.",
+      feedbackIncorrect: "Work backward from n + 1 = 3: that means n = 2 neighboring hydrogens."
+    },
+    {
+      type: "quiz",
+      text: "A proton has no chemically inequivalent neighbors within three bonds. What splitting pattern should it show?",
+      options: [
+        "Doublet",
+        "Triplet",
+        "Singlet (unsplit)",
+        "Quartet"
+      ],
+      correctIndex: 2,
+      feedbackCorrect: "Correct — with 0 neighbors, n + 1 = 1, meaning a single unsplit peak.",
+      feedbackIncorrect: "Not quite — 0 neighbors means n + 1 = 1, a singlet with no splitting."
+    }
+  ],
+
+  // PRACTICE 6 — Symmetry & Equivalence (new, quiz-based)
+  [
+    {
+      type: "quiz",
+      text: "A molecule has a mirror plane that maps one end of a chain perfectly onto the other. What does this mean for the protons on each end?",
+      options: [
+        "They are chemically equivalent and produce one combined signal",
+        "They are always chemically inequivalent",
+        "One end will not appear in the spectrum at all",
+        "They must have different integrations"
+      ],
+      correctIndex: 0,
+      feedbackCorrect: "Right — mirror-symmetric positions are chemically equivalent and give a single signal.",
+      feedbackIncorrect: "Not quite — protons related by a molecule's symmetry are chemically equivalent, producing one shared signal."
+    },
+    {
+      type: "quiz",
+      text: "Three hydrogens are attached to the very same carbon (like a methyl group). Are they typically chemically equivalent?",
+      options: [
+        "No, each one is always distinct",
+        "Yes, hydrogens on the same carbon are usually locally equivalent",
+        "Only if the molecule has no other atoms",
+        "Equivalence doesn't apply within a single carbon"
+      ],
+      correctIndex: 1,
+      feedbackCorrect: "Correct — hydrogens sharing a carbon are generally equivalent by local symmetry, giving one signal.",
+      feedbackIncorrect: "Not quite — hydrogens on the same carbon are usually equivalent by local symmetry."
+    },
+    {
+      type: "quiz",
+      text: "How many total ¹H NMR signals would you expect from a molecule with 3 chemically inequivalent proton environments?",
+      options: ["1", "2", "3", "It can't be determined"],
+      correctIndex: 2,
+      feedbackCorrect: "Right — the number of signals equals the number of chemically inequivalent environments.",
+      feedbackIncorrect: "Not quite — each chemically inequivalent environment produces its own signal, so 3 environments → 3 signals."
+    }
   ]
 ];
+
+/* ---------- PAGE CONTROL ---------- */
 
 function showPage(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
@@ -401,8 +550,11 @@ function resumeLesson() {
 }
 
 function openPractice() {
+  pauseAudioSafely();
   showPage("practicePage");
 }
+
+/* ---------- PROGRESS PERSISTENCE ---------- */
 
 function saveProgress() {
   try {
@@ -434,6 +586,8 @@ function refreshContinueBanner() {
   }
 }
 
+/* ---------- CHAPTER JUMP MENU + HOMEPAGE ROADMAP ---------- */
+
 function populateChapterMenu() {
   const select = document.getElementById("chapterSelect");
   if (!select) return;
@@ -452,7 +606,6 @@ function populateChapterMenu() {
 function syncChapterMenu() {
   const select = document.getElementById("chapterSelect");
   if (!select) return;
-  // Highlight the chapter that contains the current step.
   let current = 0;
   lessons.forEach((lesson, i) => {
     if (lesson.chapter && i <= lessonStep) current = i;
@@ -465,6 +618,31 @@ function jumpToChapter(value) {
   updateLesson();
 }
 
+function buildRoadmap() {
+  const grid = document.getElementById("roadmapGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  lessons.forEach((lesson, i) => {
+    if (!lesson.chapter) return;
+    const card = document.createElement("div");
+    card.className = "roadmap-card";
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    const blurb = chapterBlurbs[lesson.chapter] || "";
+    card.innerHTML = `<h3>${lesson.chapter}</h3><p>${blurb}</p>`;
+    const go = () => openBasics(i);
+    card.addEventListener("click", go);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        go();
+      }
+    });
+    grid.appendChild(card);
+  });
+}
+
+/* ---------- LESSON LOGIC ---------- */
 
 function onBoardClick() {
   const lesson = lessons[lessonStep];
@@ -512,64 +690,63 @@ function updateLesson() {
   if (lesson.type === "quiz") {
     boardContent.classList.add("hidden");
     quizCard.classList.remove("hidden");
-    renderQuiz(lesson);
+    renderQuizInto(
+      lesson,
+      { question: "quizQuestion", options: "quizOptions", feedback: "quizFeedback" },
+      () => {
+        quizAnswered = true;
+        updateNavButtons(lessonStep, lessons.length, lesson);
+      }
+    );
   } else {
     quizCard.classList.add("hidden");
     boardContent.classList.remove("hidden");
     document.getElementById("lessonImage").src = lesson.image;
   }
 
-  const audio = document.getElementById("narration");
-  if (lesson.audio) {
-    audio.src = lesson.audio;
-    attemptPlay(audio);
-  } else {
-    audio.removeAttribute("src");
-    setPlayIcon(false);
-  }
-
+  playLessonAudio(lesson.audio);
   updateNavButtons(lessonStep, lessons.length, lesson);
 }
 
-function renderQuiz(lesson) {
-  document.getElementById("quizQuestion").textContent = lesson.text;
-  const optionsDiv = document.getElementById("quizOptions");
-  optionsDiv.innerHTML = "";
-  const feedback = document.getElementById("quizFeedback");
-  feedback.textContent = "";
-  feedback.className = "quiz-feedback";
+/* Shared multiple-choice quiz renderer, used by both the basics
+   lesson board and the new practice quiz sets. */
+function renderQuizInto(lesson, ids, onAnswered) {
+  const questionEl = document.getElementById(ids.question);
+  const optionsEl = document.getElementById(ids.options);
+  const feedbackEl = document.getElementById(ids.feedback);
+
+  questionEl.textContent = lesson.text;
+  optionsEl.innerHTML = "";
+  feedbackEl.textContent = "";
+  feedbackEl.className = "quiz-feedback";
 
   lesson.options.forEach((optionText, i) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "quiz-option";
     btn.textContent = optionText;
-    btn.addEventListener("click", () => handleQuizAnswer(i, lesson, btn));
-    optionsDiv.appendChild(btn);
+    btn.addEventListener("click", () => {
+      const buttons = optionsEl.querySelectorAll(".quiz-option");
+      if (buttons[0] && buttons[0].disabled) return; // already answered
+      buttons.forEach((b) => (b.disabled = true));
+
+      if (i === lesson.correctIndex) {
+        btn.classList.add("correct");
+        feedbackEl.textContent = lesson.feedbackCorrect;
+        feedbackEl.classList.add("correct");
+      } else {
+        btn.classList.add("incorrect");
+        buttons[lesson.correctIndex].classList.add("correct");
+        feedbackEl.textContent = lesson.feedbackIncorrect;
+        feedbackEl.classList.add("incorrect");
+      }
+      onAnswered();
+    });
+    optionsEl.appendChild(btn);
   });
 }
 
-function handleQuizAnswer(i, lesson, btn) {
-  if (quizAnswered) return;
-  quizAnswered = true;
-
-  const buttons = document.querySelectorAll("#quizOptions .quiz-option");
-  buttons.forEach(b => (b.disabled = true));
-
-  const feedback = document.getElementById("quizFeedback");
-  if (i === lesson.correctIndex) {
-    btn.classList.add("correct");
-    feedback.textContent = lesson.feedbackCorrect;
-    feedback.classList.add("correct");
-  } else {
-    btn.classList.add("incorrect");
-    buttons[lesson.correctIndex].classList.add("correct");
-    feedback.textContent = lesson.feedbackIncorrect;
-    feedback.classList.add("incorrect");
-  }
-
-  updateNavButtons(lessonStep, lessons.length, lesson);
-}
+/* ---------- SHARED PROGRESS UI ---------- */
 
 function updateProgressUI(step, total, prefix) {
   const counterId = prefix ? "practiceStepCounter" : "stepCounter";
@@ -599,13 +776,42 @@ function updateNavButtons(step, total, lesson) {
   nextBtn.textContent = step >= total - 1 ? "Go to Practice →" : "Next ›";
 }
 
+/* ---------- AUDIO (hardened against autoplay blocks / load errors) ---------- */
+
+function playLessonAudio(src) {
+  const audio = document.getElementById("narration");
+  const status = document.getElementById("audioStatus");
+  if (!audio) return;
+
+  if (status) status.textContent = "";
+
+  if (!src) {
+    audio.removeAttribute("src");
+    setPlayIcon(false);
+    return;
+  }
+
+  audio.src = src;
+  try {
+    audio.load();
+  } catch (e) {
+    /* some browsers don't need an explicit load() call — safe to ignore */
+  }
+  attemptPlay(audio);
+}
 
 function attemptPlay(audio) {
   const playAttempt = audio.play();
   if (playAttempt && typeof playAttempt.catch === "function") {
     playAttempt
       .then(() => setPlayIcon(true))
-      .catch(() => setPlayIcon(false)); // autoplay blocked until user interacts
+      .catch((err) => {
+        setPlayIcon(false);
+        // AbortError happens when the src changes mid-play (fast navigation) — harmless.
+        if (err && err.name === "NotAllowedError") {
+          showAudioStatus("Tap ▶ to hear narration.");
+        }
+      });
   } else {
     setPlayIcon(true);
   }
@@ -652,6 +858,42 @@ function setPlayIcon(isPlaying) {
   playPauseBtn.setAttribute("aria-pressed", String(isPlaying));
 }
 
+function showAudioStatus(message) {
+  const status = document.getElementById("audioStatus");
+  if (status) status.textContent = message;
+}
+
+/* Browsers block audio-with-sound until the page has registered a real
+   user gesture. Every lesson-advance action here is already a click or
+   keypress, but as a defensive first pass we do one silent, muted
+   play/pause on the very first interaction anywhere on the page —
+   this "warms up" the audio element so the first real narration line
+   is far less likely to be blocked. */
+function primeAudioOnce() {
+  if (audioPrimed) return;
+  audioPrimed = true;
+  const audio = document.getElementById("narration");
+  if (!audio) return;
+  try {
+    const wasMuted = audio.muted;
+    audio.muted = true;
+    const p = audio.play();
+    if (p && typeof p.catch === "function") {
+      p.then(() => {
+        audio.pause();
+        audio.muted = wasMuted;
+      }).catch(() => {
+        audio.muted = wasMuted;
+      });
+    } else {
+      audio.muted = wasMuted;
+    }
+  } catch (e) {
+    /* nothing to unlock yet (no src) — fine, real playback still attempts normally later */
+  }
+}
+
+/* ---------- PRACTICE LOGIC ---------- */
 
 function openPracticeBoard(index) {
   practiceIndex = index;
@@ -662,6 +904,8 @@ function openPracticeBoard(index) {
 
 function nextPracticeLesson() {
   const lessonSet = practiceLessons[practiceIndex];
+  const lesson = lessonSet[practiceStep];
+  if (lesson.type === "quiz" && !practiceQuizAnswered) return;
   if (practiceStep >= lessonSet.length - 1) {
     openPractice();
     return;
@@ -679,9 +923,9 @@ function prevPracticeLesson() {
 function updatePracticeLesson() {
   const lessonSet = practiceLessons[practiceIndex];
   const lesson = lessonSet[practiceStep];
+  practiceQuizAnswered = false;
 
   document.getElementById("practiceText").textContent = lesson.text;
-  document.getElementById("practiceImage").src = lesson.image;
 
   const bubbleImage = document.getElementById("practiceBubbleImage");
   if (lesson.bubbleImage) {
@@ -691,18 +935,51 @@ function updatePracticeLesson() {
     bubbleImage.style.display = "none";
   }
 
-  updateProgressUI(practiceStep, lessonSet.length, "practice");
+  const quizCard = document.getElementById("practiceQuizCard");
+  const boardContent = document.getElementById("practiceBoardContent");
 
+  if (lesson.type === "quiz") {
+    boardContent.classList.add("hidden");
+    quizCard.classList.remove("hidden");
+    renderQuizInto(
+      lesson,
+      { question: "practiceQuizQuestion", options: "practiceQuizOptions", feedback: "practiceQuizFeedback" },
+      () => {
+        practiceQuizAnswered = true;
+        updatePracticeNavButtons(lessonSet.length);
+      }
+    );
+  } else {
+    quizCard.classList.add("hidden");
+    boardContent.classList.remove("hidden");
+    document.getElementById("practiceImage").src = lesson.image || "";
+  }
+
+  updateProgressUI(practiceStep, lessonSet.length, "practice");
+  updatePracticeNavButtons(lessonSet.length);
+}
+
+function updatePracticeNavButtons(total) {
+  const lessonSet = practiceLessons[practiceIndex];
+  const lesson = lessonSet[practiceStep];
   const prevBtn = document.getElementById("practicePrevBtn");
   const nextBtn = document.getElementById("practiceNextBtn");
-  if (prevBtn) prevBtn.disabled = practiceStep <= 0;
-  if (nextBtn) nextBtn.textContent = practiceStep >= lessonSet.length - 1 ? "Back to Practice Menu" : "Next ›";
+  if (!prevBtn || !nextBtn) return;
+
+  prevBtn.disabled = practiceStep <= 0;
+  const blocked = lesson.type === "quiz" && !practiceQuizAnswered;
+  nextBtn.disabled = !!blocked;
+  nextBtn.textContent = practiceStep >= total - 1 ? "Back to Practice Menu" : "Next ›";
 }
 
 function onPracticeBoardClick() {
+  const lessonSet = practiceLessons[practiceIndex];
+  const lesson = lessonSet[practiceStep];
+  if (lesson.type === "quiz" && !practiceQuizAnswered) return;
   nextPracticeLesson();
 }
 
+/* ---------- KEYBOARD & SWIPE NAVIGATION ---------- */
 
 document.addEventListener("keydown", (e) => {
   const basicsVisible = !document.getElementById("basicsPage").classList.contains("hidden");
@@ -741,6 +1018,7 @@ function setupSwipe(elementId, onLeft, onRight) {
   }, { passive: true });
 }
 
+/* ---------- CONTACT EMAIL (basic scraper obfuscation) ---------- */
 
 function setupEmailLink() {
   const el = document.getElementById("contactEmail");
@@ -751,17 +1029,42 @@ function setupEmailLink() {
   el.href = `mailto:${user}@${domain}`;
 }
 
+/* ---------- BROKEN IMAGE FALLBACK ----------
+   Hides any <img> that fails to load (e.g. homepage/about assets that
+   haven't been uploaded yet) instead of showing a broken-image icon. */
+function setupImageFallbacks() {
+  document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("error", () => {
+      img.style.visibility = "hidden";
+    });
+    img.addEventListener("load", () => {
+      img.style.visibility = "visible";
+    });
+  });
+}
+
+/* ---------- INIT ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
   setupEmailLink();
   refreshContinueBanner();
+  buildRoadmap();
+  setupImageFallbacks();
   setupSwipe("blackboard", nextLesson, prevLesson);
   setupSwipe("practiceBoardPage", nextPracticeLesson, prevPracticeLesson);
+
+  document.addEventListener("click", primeAudioOnce, { once: true });
+  document.addEventListener("keydown", primeAudioOnce, { once: true });
 
   const audio = document.getElementById("narration");
   if (audio) {
     audio.addEventListener("play", () => setPlayIcon(true));
     audio.addEventListener("pause", () => setPlayIcon(false));
     audio.addEventListener("ended", () => setPlayIcon(false));
+    audio.addEventListener("error", () => {
+      if (audio.getAttribute("src")) {
+        showAudioStatus("Narration audio couldn't be loaded for this step — check the file path.");
+      }
+    });
   }
 });
