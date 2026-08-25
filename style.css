@@ -281,6 +281,7 @@ a:focus-visible {
 /* --- about --- */
 .about-card {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 26px;
   background: var(--cream-card);
@@ -288,6 +289,10 @@ a:focus-visible {
   border-radius: 14px;
   padding: 26px;
   flex-wrap: wrap;
+}
+
+.about-text {
+  flex: 1;
 }
 
 .about-photo {
