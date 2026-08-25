@@ -375,7 +375,7 @@ const practiceLessons = [
       bubbleImage: "images/bubble2.png"
     },
     {
-      text: "Correct! This molecule has three unique proton environments.",
+      text: "Correct! This molecule has two unique proton environments.",
       image: "images/practice1_step3.png",
       bubbleImage: "images/bubble2.png"
     }
